@@ -13,7 +13,7 @@
     
 * Local variables
 
-	local year_min = 2018
+	local year_min = 2017
 	local year_max = 2021
 	
 * ****************************************************************

@@ -13,10 +13,10 @@
     
 * Local variables
 
-	local year_min = 2018
+	local year_min = 2017
 	local year_max = 2021
  
-    local years    1718 1819 1920 2021
+    local years    1617 1718 1819 1920 2021
 	
 * ****************************************************************
 * 1. Opening & appending files

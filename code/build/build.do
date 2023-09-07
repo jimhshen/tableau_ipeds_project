@@ -20,8 +20,11 @@
     local adm       0
     local sfa       0
     local gr        0
+    local usnews    0
+    local ic        0
+    local icay      0
     
-    local files effy adm sfa gr
+    local files effy adm sfa gr usnews ic icay
     
 * Run based on switches
 
@@ -30,6 +33,9 @@
     if `sfa' 				do "${build_code}/build_sfa.do"
     if `gr' 				do "${build_code}/build_gr.do"
     if `adm' 				do "${build_code}/build_adm.do"
+    if `ic' 				do "${build_code}/build_ic.do"
+    if `icay'				do "${build_code}/build_icay.do"
+    if `usnews'  			do "${build_code}/build_usnews.do"    
     
 * Merge all do files
 

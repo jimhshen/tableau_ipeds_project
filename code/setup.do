@@ -12,11 +12,10 @@
 * Global Locations
 
     global user `c(username)'
-    
-    //global root "C:/Users/${user}/Dropbox"
-    global root         "D:/Google Drive"
 
-    global path         "${root}/Tableau/ipeds_project"
+    global root         "C:/Users/${user}/Documents/GitHub"
+
+    global path         "${root}/tableau_ipeds_project"
     
     global code         "${path}/code"
     global build_code   "${code}/build"

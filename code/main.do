@@ -22,7 +22,8 @@
 	version 18.0
 	
 * Run Setup
-	global setup_path   "D:/Google Drive/Tableau/ipeds_project/code"
+	global setup_path   "C:/Users/Jim/Documents/GitHub/tableau_ipeds_project/code"
+    
 	do "${setup_path}/setup.do"
     
 * Switches

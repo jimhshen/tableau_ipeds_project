@@ -15,7 +15,7 @@
     
 * Local variables
 
-	local year_min = 2018
+	local year_min = 2017
 	local year_max = 2021
 
 * ****************************************************************   
@@ -30,8 +30,9 @@
     rename G ranklac2020
     rename H ranklac2019
     rename I ranklac2018
+    rename J ranklac2017
     
-    keep unitid ranklac2021 ranklac2020 ranklac2019 ranklac2018
+    keep unitid rank*
     
     destring rank*, force replace
     
@@ -56,8 +57,9 @@
     rename G rankuni2020
     rename H rankuni2019
     rename I rankuni2018
+    rename J rankuni2017
     
-    keep unitid rankuni2021 rankuni2020 rankuni2019 rankuni2018
+    keep unitid rank*
     
     reshape long rankuni,  i(unitid) j(year)
     

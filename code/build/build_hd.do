@@ -13,7 +13,7 @@
     
 * Local variables
 
-	local year_min = 2018
+	local year_min = 2017
 	local year_max = 2021
 	
 * ****************************************************************
@@ -29,7 +29,7 @@
 
 	clear
 	forvalues year = `year_min'(1)`year_max' { 
-		append using `hd`year''
+		append using `hd`year'', force
 	}
     
 * ****************************************************************
@@ -49,7 +49,8 @@
             instsize!="Not applicable":label_instsize
  
 * Keep variables of interest
-	keep unitid instnm city stabbr zip year obereg control iclevel instsize longitud latitude
+	keep unitid instnm city stabbr zip year obereg control iclevel instsize ///
+    longitud latitude webaddr hbcu tribal
     
 * Use 5 digit zip
     replace zip=substr(zip,1,5)

@@ -12,13 +12,13 @@
 * List of IPEDS data to retrieve.
 * Need multiple lists for inconsistent IPEDS naming conventions
 
-    local years1    2018 2019 2020 2021
-    local years2    1718 1819 1920 2021
+    local years1    2017 2018 2019 2020 2021
+    local years2    1617 1718 1819 1920 2021
     
-    local files1    hd effy gr adm
+    local files1    hd effy gr adm ic
     local files2    sfa
-    local files3    ef
-    local suffix3   a b
+    local files3    ic
+    local suffix3   ay
     
 * Retreive IPEDS data, only use revised files, update paths, move 
 
@@ -57,47 +57,8 @@
             }
         }
     }
- 
-    foreach year in `years1' {
-        foreach file in `files3' {
-            foreach suffix in `suffix3' {
-                cd "${raw}"
-                if fileexists("`file'`year'`suffix'.csv") == 0 {
-                    copy "$nces_src/`file'`year'`suffix'.zip" ///
-                    "`file'`year'`suffix'.zip"
-                   
-                    unzipfile `file'`year'`suffix'.zip
-                    erase `file'`year'`suffix'.zip
-                }
-                if fileexists("`file'`year'`suffix'_rv.csv") == 1 {
-                    erase `file'`year'`suffix'.csv
-                    !rename "`file'`year'`suffix'_rv.csv" "`file'`year'`suffix'.csv"
-                }
-            
-                cd "${doc}"
-                if fileexists("`file'`year'`suffix'.xlsx") == 0 {
-                    copy "$nces_src/`file'`year'`suffix'_dict.zip" ///
-                    "`file'`year'`suffix'_dict.zip"
-                    
-                   unzipfile "`file'`year'`suffix'_dict.zip" 
-                   erase "`file'`year'`suffix'_dict.zip"
-                }
-
-                cd "${ipeds_do}"
-                if fileexists("`file'`year'`suffix'.do") == 0 {
-                    copy "$nces_src/`file'`year'`suffix'_stata.zip" ///
-                    "`file'`year'`suffix'_stata.zip"
-                    
-                   unzipfile "`file'`year'`suffix'_stata.zip" 
-                   erase "`file'`year'`suffix'_stata.zip"
-                python script dict_path_fix.py, args(`file'`year'`suffix' "$raw_code")                
-                }
-            }
-        }
-    }
-       
     
-   foreach year in `years2' {
+    foreach year in `years2' {
         foreach file in `files2' {
             cd "${raw}"
             if fileexists("`file'`year'.csv") == 0 {
@@ -131,3 +92,54 @@
             }
         }
     }
+    
+    foreach year in `years1' {
+        foreach file in `files3' {
+            foreach suffix in `suffix3' {
+                cd "${raw}"
+                if fileexists("`file'`year'_`suffix'.csv") == 0 {
+                    copy "$nces_src/`file'`year'_`suffix'.zip" ///
+                    "`file'`year'_`suffix'.zip"
+                   
+                    unzipfile `file'`year'_`suffix'.zip
+                    erase `file'`year'_`suffix'.zip
+                }
+                if fileexists("`file'`year'_`suffix'_rv.csv") == 1 {
+                    erase `file'`year'_`suffix'.csv
+                    !rename "`file'`year'_`suffix'_rv.csv" "`file'`year'_`suffix'.csv"
+                }
+            
+                cd "${doc}"
+                if fileexists("`file'`year'_`suffix'.xlsx") == 0 {
+                    copy "$nces_src/`file'`year'_`suffix'_dict.zip" ///
+                    "`file'`year'_`suffix'_dict.zip"
+                    
+                   unzipfile "`file'`year'_`suffix'_dict.zip" 
+                   erase "`file'`year'_`suffix'_dict.zip"
+                }
+
+                cd "${ipeds_do}"
+                if fileexists("`file'`year'_`suffix'.do") == 0 {
+                    copy "$nces_src/`file'`year'_`suffix'_stata.zip" ///
+                    "`file'`year'_`suffix'_stata.zip"
+                    
+                   unzipfile "`file'`year'_`suffix'_stata.zip" 
+                   erase "`file'`year'_`suffix'_stata.zip"
+                python script dict_path_fix.py, args(`file'`year'_`suffix' "$raw_code")                
+                }
+            }
+        }
+    }    
+    
+    cd "${raw}"    
+    if fileexists("usnews_lac.xlsx")==0 {
+        copy "https://andyreiter.com/wp-content/uploads/2022/09/US-News-Rankings-Liberal-Arts-Colleges-Through-2023.xlsx" ///
+        "${raw}/usnews_lac.xlsx"
+    }
+    if fileexists("usnews_uni.xlsx")==0 {
+        copy "https://andyreiter.com/wp-content/uploads/2022/09/US-News-Rankings-Universities-Through-2023.xlsx" ///
+        "${raw}/usnews_uni.xlsx" 
+    }
+ 
+
+ 
