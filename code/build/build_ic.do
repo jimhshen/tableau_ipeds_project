@@ -34,16 +34,27 @@
     
 * ****************************************************************
 * 2. Keep variables of interest
-* ****************************************************************
+* ***************************************************************
+    
+    gen religious=1 if cntlaffi==4
+    replace religious=2 if religious==.
+    
+    gen rotc=1 if slo5==1
+    replace rotc=2 if rotc==.
+    
+    gen abroad=1 if slo6==1
+    replace abroad=2 if abroad==.
+    
+    label var religious "Religious Institution"
+    label var rotc "Has ROTC program"
+    label var abroad "Has study abroad program"
+    
+    label define label_dummy 1 "Yes"
+    label define label_dummy 2 "No",add
+    label values rotc religious abroad label_dummy
+    
+    
+    
+    keep unitid year religious rotc abroad
 
-    keep unitid slo5 slo6 cntlaffi year
-    label var cntlaffi "Religious Institution"
-    
-    label define label_cntlaffi2 1 "No"
-    label define label_cntlaffi2 2 "No",add
-    label define label_cntlaffi2 3 "No",add
-    label define label_cntlaffi2 4 "Religious",add
-    label values cntlaffi label_cntlaffi2
-    rename cntlaffi religious
-    
     save "${build_data}/ic.dta", replace

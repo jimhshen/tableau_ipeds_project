@@ -45,6 +45,11 @@
         merge 1:1 unitid year using "${build_data}/`file'.dta"
         drop if _merge==2
         drop _merge
+        if "`file'"=="ic" {
+            replace religious=2 if religious==.
+            replace rotc=2 if rotc==.
+            replace abroad=2 if abroad==.            
+        }        
     }
     
     save "${build_data}/ipeds.dta", replace
