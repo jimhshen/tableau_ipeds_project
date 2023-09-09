@@ -81,7 +81,8 @@
     drop grn* npt* npgrn* scfy*
     
 * ****************************************************************
-* 4. Update variable labels
+* 5. Update variable labels, clean data so there are no negative
+*    costs of attendance
 * ****************************************************************  
     
     label var scugrad "Total Undergraduates"
@@ -117,9 +118,13 @@
     label var gis4a52 "Average amount of aid, income >$110k"
     label var npist2  "Average net price"
     label var npis412 "Average net price, income $0-$30k"
-    label var npis422 "Average net price, income $48k-$75k"
+    label var npis422 "Average net price, income $30k-$48k"
     label var npis432 "Average net price, income $48k-$75k"
     label var npis442 "Average net price, income $75k-$110k"
     label var npis452 "Average net price, income >$110k"
 
+    foreach var of varlist npis* {
+        replace `var'=`var'*(-1) if `var'<0
+    }
+    
     save "${build_data}/sfa.dta", replace

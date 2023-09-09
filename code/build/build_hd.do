@@ -15,6 +15,7 @@
 
 	local year_min = 2017
 	local year_max = 2021
+    local dummies tribal hbcu    
 	
 * ****************************************************************
 * 1. Opening & appending files
@@ -88,5 +89,11 @@
     label define label_control2 1 "Public"
     label define label_control2 2 "Private",add
     label values control label_control2
+    
+    label values `dummies' remove
+    
+    foreach var in `dummies' {
+        replace `var'=0 if `var'==2
+    }
     
     save "${build_data}/hd.dta", replace

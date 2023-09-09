@@ -81,9 +81,14 @@
     
     label values year year
     
-    label var year       "Academic Year"    
+    gen top100lac=1 if ranklac!=.
+    gen top100uni=1 if rankuni!=.
+    
+    label var year       "Academic Year"
     label var rankuni    "US News & World Report Rank (Universities)"
     label var ranklac    "US News & World Report Rank (Liberal Arts Colleges)"
+    label var top100lac  "Top 100 US News & World Report Liberal Arts Colleges"
+    label var top100uni  "Top 100 US News & World Report Universities"
     
     save "${build_data}/usnews.dta", replace
 

@@ -37,23 +37,17 @@
 * ***************************************************************
     
     gen religious=1 if cntlaffi==4
-    replace religious=2 if religious==.
+    replace religious=0 if religious==.
     
     gen rotc=1 if slo5==1
-    replace rotc=2 if rotc==.
+    replace rotc=0 if rotc==.
     
     gen abroad=1 if slo6==1
-    replace abroad=2 if abroad==.
+    replace abroad=0 if abroad==.
     
     label var religious "Religious Institution"
     label var rotc "Has ROTC program"
     label var abroad "Has study abroad program"
-    
-    label define label_dummy 1 "Yes"
-    label define label_dummy 2 "No",add
-    label values rotc religious abroad label_dummy
-    
-    
     
     keep unitid year religious rotc abroad
 
